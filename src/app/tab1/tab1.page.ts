@@ -21,6 +21,7 @@ export class Tab1Page {
   nombre = '';
   contador = 0;
   mensaje = '';
+  edad = '';
 
   private datos = inject(DatosService);
   private router = inject(Router);
@@ -47,8 +48,15 @@ export class Tab1Page {
       return;
     }
 
+    const edadLimpia = this.edad.trim();
+
+    if (!edadLimpia) {
+      this.mensaje = 'Ingresa tu edad antes de continuar.';
+      return;
+    }
+
     this.mensaje = '';
-    this.datos.guardar(nombreLimpio, this.contador);
+    this.datos.guardar(nombreLimpio, this.contador, edadLimpia);
     this.router.navigateByUrl('/tabs/tab2');
   }
 }
